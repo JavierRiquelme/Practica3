@@ -2,48 +2,33 @@
 
 @section('content')
 
-<a class="btn btn-success mt-3 mb-3" href="{{route('post.create')}}">
-    Crear
-</a>
-
-<form action="{{ route('post.index') }}" class="form-inline mb-2">
-    <select name="created_at" class="form-control">
-        <option value="DESC">Descendente</option>
-        <option {{ request('created_at') == "ASC" ? "selected" : '' }} value="ASC">Ascendente</option>
-    </select>
-
-    <input type="text" value="{{ request('search') }}" name="search" placeholder="Buscar..." class="ml-1 form-control">
-
-    <button type="submit" class="ml-2 btn btn-success"><i class="fa fa-search">Buscar</i></button>
-</form>
+@if(count($postComments))
 
 <table class="table">
     <thead>
         <tr>
             <td>Id</td>
             <td>Título</td>
-            <td>Categorías</td>
-            <td>Posteando</td>
+            <td>Aprovado</td>
+            <td>Usuario</td>
             <td>Creación</td>
             <td>Actualización</td>
             <td>Acciones</td>
         </tr>
     </thead>
     <tbody>
-        @foreach ($posts as $post)
+        @foreach ($postComments as $postComment)
         <tr>
-            <td>{{$post->id}}</td>
-            <td>{{$post->title}}</td>
-            <td>{{$post->category->title}}</td>
-            <td>{{$post->posted}}</td>
-            <td>{{$post->created_at->format('d-m-Y')}}</td>
-            <td>{{$post->updated_at->format('d-m-Y')}}</td>
+            <td>{{$postComment->id}}</td>
+            <td>{{$postComment->title}}</td>
+            <td>{{$postComment->approved}}</td>
+            <td>{{$postComment->user->name}}</td>
+            <td>{{$postComment->created_at->format('d-m-Y')}}</td>
+            <td>{{$postComment->updated_at->format('d-m-Y')}}</td>
             <td>
-            <a href="{{route('post.show', $post->id)}}" class="btn btn-primary">Ver</a>
-            <a href="{{route('post.edit', $post->id)}}" class="btn btn-primary">Actualizar</a>
-            <a href="{{route('post-comment.post', $post->id)}}" class="btn btn-primary">Comentarios</a>
-
-            <button class="btn btn-danger" type="button"  data-toggle="modal" data-target="#deleteModal" data-id="{{$post->id}}">Eliminar</button>
+            <a href="{{route('post-comment.show', $postComment->id)}}" class="btn btn-primary">Ver</a>
+            
+            <button class="btn btn-danger" type="button"  data-toggle="modal" data-target="#deleteModal" data-id="{{$postComment->id}}">Eliminar</button>
                 
             </td>
         </tr>
@@ -51,12 +36,7 @@
     </tbody>
 </table>
 
-{{$posts->appends(
-    [
-        'created_at' => request('created_at'),
-        'search' => request('search'),
-    ]
-    )->links()}}
+{{$postComments->links()}}
 
 <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -73,7 +53,7 @@
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
 
-          <form id="formDelete" method="POST" action="{{route('post.destroy', 0)}}" data-action="{{route('post.destroy', 0)}}">
+          <form id="formDelete" method="POST" action="{{route('post-comment.destroy', 0)}}" data-action="{{route('post-comment.destroy', 0)}}">
             @method('DELETE')
             @csrf
             <button type="submit" class="btn btn-danger">Borrar</button>
@@ -100,5 +80,11 @@
         })
       }
   </script>
+
+@else
+
+    <h1>No hay comentarios para el Post seleccionado.</h1>
+
+@endif
 
 @endsection

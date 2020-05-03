@@ -2,10 +2,12 @@
 
 namespace App;
 
+use App\Tag;
 use App\Rol;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Hash;
 
 class User extends Authenticatable
 {
@@ -40,5 +42,13 @@ class User extends Authenticatable
 
     public function rol(){
         return $this->belongsTo(Rol::class);
+    }
+
+    public function setPasswordAttribute($value){
+        $this->attributes["password"] = Hash::make($value);
+    }
+
+    public function tags(){
+        return $this->morphToMany(Tag::class, 'taggable');
     }
 }

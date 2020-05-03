@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Tag;
 use App\Category;
 use App\PostImage;
 use Illuminate\Database\Eloquent\Model;
@@ -16,5 +17,13 @@ class Post extends Model
 
     public function image(){
         return $this->hasOne(PostImage::class);
+    }
+
+    public function images(){
+        return $this->hasMany(PostImage::class);
+    }
+
+    public function tags(){
+        return $this->morphToMany(Tag::class, 'taggable');
     }
 }

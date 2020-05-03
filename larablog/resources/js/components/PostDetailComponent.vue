@@ -3,7 +3,7 @@
 		<div v-if="post">
 			<div class="card mt-3">
 				<div class="card-header">
-					<img class="card-img-top" :src=" '/images/'+post.image.image" alt="Card image cap">
+					<img class="card-img-top" :src="'/images/' + post.image.image" alt="Card image cap">
 				</div>
 			  <div class="card-body">
 			    <h1 class="card-title">{{post.title}}</h1>

@@ -41,9 +41,25 @@ Route::resource('dashboard/post', 'dashboard\PostController');
 
 Route::post('dashboard/post/{post}/image', 'dashboard\PostController@image')->name('post.image');
 
+Route::get('dashboard/post/image-download/{image}', 'dashboard\PostController@imageDownload')->name('post.image-download');
+
+Route::delete('dashboard/post/image-delete/{image}', 'dashboard\PostController@imageDelete')->name('post.image-delete');
+
+Route::post('dashboard/post/content_image', 'dashboard\PostController@contentImage');
+
 Route::resource('dashboard/category', 'dashboard\CategoryController');
 
 Route::resource('dashboard/user', 'dashboard\UserController');
+
+Route::resource('dashboard/contact', 'dashboard\ContactController')->only(['index','show','destroy']);
+
+Route::resource('dashboard/post-comment', 'dashboard\PostCommentController')->only(['index','show','destroy']);
+
+Route::get('dashboard/post-comment/{post}/post', 'dashboard\PostCommentController@post')->name('post-comment.post');
+
+Route::get('dashboard/post-comment/j-show/{postComment}', 'dashboard\PostCommentController@jshow');
+
+Route::post('dashboard/post-comment/proccess/{postComment}', 'dashboard\PostCommentController@proccess');
 
 Route::get('/', 'web\Webcontroller@index')->name("index");
 

@@ -2,8 +2,6 @@
 
 @section('content')
 
-@include('dashboard.partials.validation-error')
-
 <form action="{{route('post.update', $post->id)}}" method="POST">
     @method('PUT')
     @include('dashboard.post._form')
@@ -21,6 +19,21 @@
     </div>
 </form>
 
+<div class="row mt-3">
+    @foreach ($post->images as $image)
+    <div class="col-3">
+        <img class="w-100" src="{{ $image->getImageUrl() }}">
+        <a href="{{ route('post.image-download',$image->id) }}" class="float-left btn btn-success btn-sm mt-1">Descargar</a>
+
+        <form action="{{ route('post.image-delete',$image->id) }}" method="POST">
+            @method("DELETE")
+            @csrf
+            <button class="float-right btn btn-danger btn-sm mt-1" type="submit">Borrar</button>
+        </form>
+
+    </div>
+    @endforeach
+</div>
 @endsection
 
 

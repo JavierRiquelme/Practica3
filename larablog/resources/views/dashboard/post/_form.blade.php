@@ -30,9 +30,19 @@
         </div>
 
         <div class="form-group">
+            <label for="tags_id">Tags</label>
+            <select multiple class="form-control" name="tags_id[]" id="tags_id">
+                @foreach ($tags as $title => $id)
+                 <option {{in_array($id, old('tags_id') ?: $post->tags->pluck("id")->toArray()) ? "selected" : ""}} value="{{$id}}">{{$title}}</option>
+                @endforeach
+            </select>
+        </div>
+
+        <div class="form-group">
             <label for="content">Contenido</label>
                 <textarea class="form-control" name="content" id="content" cols="30" rows="10" >{{old('content', $post->content)}}</textarea>
         </div>
+        <input type="hidden" id="token" value="{{csrf_token()}}">
         <input type="submit" value="Enviar" class="btn btn-primary">
     
     
