@@ -9,11 +9,17 @@
     "license": "MIT",
     "require": {
         "php": "^7.2.5",
+        "consoletvs/charts": "6.*",
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^1.0",
         "guzzlehttp/guzzle": "^6.3",
+        "intervention/image": "^2.5",
+        "laravel/cashier": "^11.2",
         "laravel/framework": "^7.0",
-        "laravel/tinker": "^2.0"
+        "laravel/tinker": "^2.0",
+        "maatwebsite/excel": "^3.1",
+        "simplesoftwareio/simple-qrcode": "^2.0",
+        "stichoza/google-translate-php": "^4.1"
     },
     "require-dev": {
         "facade/ignition": "^2.0",

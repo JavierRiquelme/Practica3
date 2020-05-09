@@ -7,6 +7,9 @@
 require('./bootstrap');
 
 import router from './assets/router.js';
+import VueMask from 'v-mask';
+import Vuelidate from 'vuelidate';
+import VueAWN from "vue-awesome-notifications";
 
 //import MyUploadAdapter from './assets/ckeditor/MyUploadAdapter.js';
 var MyUploadAdapter = require('./assets/ckeditor/MyUploadAdapter.js');
@@ -30,6 +33,10 @@ ClassicEditor
     .catch( error => {
         console.error( error );
     } );
+
+Vue.use(VueMask);
+Vue.use(Vuelidate);
+Vue.use(VueAWN);
 
 /**
  * The following block of code may be used to automatically register your

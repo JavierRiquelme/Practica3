@@ -7,6 +7,8 @@ use App\Post;
 use App\Category;
 use App\PostImage;
 use App\Helpers\CustomUrl;
+use App\Exports\PostsExport;
+use App\Imports\PostsImport;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\URL;
@@ -15,6 +17,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StorePostPost;
 use App\Http\Requests\UpdatePostPut;
 use Illuminate\Support\Facades\Mail;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PostController extends Controller
 {
@@ -26,6 +29,17 @@ class PostController extends Controller
     public function __construct()
     {
         $this->middleware(['auth', 'rol.admin']);
+    }
+
+    public function export(){
+        return Excel::download(new PostsExport, 'posts.xlsx');
+    }
+
+    public function import(){
+
+        Excel::import(new PostsImport, 'posts.xlsx');
+
+        return "Importado!";
     }
 
     /**
@@ -165,7 +179,7 @@ class PostController extends Controller
         return back()->with('status', 'Imagen cargada con exito');
     }
 
-        public function contentImage(Request $request){
+    public function contentImage(Request $request){
         $request->validate([
             'image' => 'required|mimes:jpeg,bmp,png|max:10240'//10Mb
         ]);

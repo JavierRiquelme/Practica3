@@ -83,6 +83,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
+        $this->authorize('edit', $user);
         return view('dashboard.user.edit', ['user' => $user]);
     }
 
@@ -95,6 +96,7 @@ class UserController extends Controller
      */
     public function update(UpdateUserPut $request, User $user)
     {
+        $this->authorize('edit', $user);
         $user->update([
             'name' => $request['name'],
             'surname' => $request['surname'],

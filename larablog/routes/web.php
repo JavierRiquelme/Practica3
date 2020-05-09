@@ -69,8 +69,25 @@ Route::get('/detail/{id}', 'web\Webcontroller@detail');
 
 Route::get('/post-category/{id}', 'web\Webcontroller@post_category');
 
+Route::get('/dashboard/excel/post-export', 'dashboard\PostController@export')->name('post.export');
+
+Route::get('/dashboard/excel/post-import', 'dashboard\PostController@import');
+
 Route::get('/contact', 'web\Webcontroller@contact');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+//Rutas paquetes:
+Route::get('/chart', 'PaquetesController@charts')->name('chart');
+Route::get('/image', 'PaquetesController@image')->name('image');
+Route::get('/qr_qenerate', 'PaquetesController@qr_qenerate')->name('qr_qenerate');
+Route::get('/translate', 'PaquetesController@translate')->name('translate');
+Route::get('/stripe_create_customer', 'PaquetesController@stripe_create_customer')->name('stripe_create_customer');
+Route::get('/stripe_payment_method_register', 'PaquetesController@stripe_payment_method_register')->name('stripe_payment_method_register');
+Route::get('/stripe_payment_method_create', 'PaquetesController@stripe_payment_method_create')->name('stripe_payment_method_create');
+Route::get('/stripe_payment_method', 'PaquetesController@stripe_payment_method')->name('stripe_payment_method');
+Route::get('/stripe_create_only_pay_form', 'PaquetesController@stripe_create_only_pay_form')->name('stripe_create_only_pay_form');
+Route::get('/stripe_create_only_pay', 'PaquetesController@stripe_create_only_pay')->name('stripe_create_only_pay');
+Route::get('/stripe_create_suscription', 'PaquetesController@stripe_create_suscription')->name('stripe_create_suscription');

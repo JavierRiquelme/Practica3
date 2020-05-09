@@ -3,7 +3,10 @@
 @section('content')
 
 <a class="btn btn-success mt-3 mb-3" href="{{route('post.create')}}">
-    Crear
+    <i class="fa fa-plus"></i>Crear
+</a>
+<a class="btn btn-primary mt-3 mb-3" href="{{route('post.export')}}">
+    <i class="fa fa-file-excel"></i> Exportar
 </a>
 
 <form action="{{ route('post.index') }}" class="form-inline mb-2">
@@ -14,7 +17,7 @@
 
     <input type="text" value="{{ request('search') }}" name="search" placeholder="Buscar..." class="ml-1 form-control">
 
-    <button type="submit" class="ml-2 btn btn-success"><i class="fa fa-search">Buscar</i></button>
+    <button type="submit" class="ml-2 btn btn-success"><i class="fa fa-search"></i></button>
 </form>
 
 <table class="table">
@@ -39,11 +42,11 @@
             <td>{{$post->created_at->format('d-m-Y')}}</td>
             <td>{{$post->updated_at->format('d-m-Y')}}</td>
             <td>
-            <a href="{{route('post.show', $post->id)}}" class="btn btn-primary">Ver</a>
-            <a href="{{route('post.edit', $post->id)}}" class="btn btn-primary">Actualizar</a>
-            <a href="{{route('post-comment.post', $post->id)}}" class="btn btn-primary">Comentarios</a>
+            <a href="{{route('post.show', $post->id)}}" class="btn btn-primary"><i class="fa fa-eye"></i></a>
+            <a href="{{route('post.edit', $post->id)}}" class="btn btn-primary"><i class="fa fa-edit"></i></a>
+            <a href="{{route('post-comment.post', $post->id)}}" class="btn btn-primary"><i class="fa-comments"></i></a>
 
-            <button class="btn btn-danger" type="button"  data-toggle="modal" data-target="#deleteModal" data-id="{{$post->id}}">Eliminar</button>
+            <button class="btn btn-danger" type="button"  data-toggle="modal" data-target="#deleteModal" data-id="{{$post->id}}"><i class="fa fa-trash"></i></button>
                 
             </td>
         </tr>

@@ -4,6 +4,7 @@ namespace App;
 
 use App\Tag;
 use App\Rol;
+use Laravel\Cashier\Billable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -12,6 +13,7 @@ use Illuminate\Support\Facades\Hash;
 class User extends Authenticatable
 {
     use Notifiable;
+    use Billable;
 
     /**
      * The attributes that are mass assignable.
@@ -50,5 +52,9 @@ class User extends Authenticatable
 
     public function tags(){
         return $this->morphToMany(Tag::class, 'taggable');
+    }
+
+    public function isAdmin(){
+        return $this->rol->key == "admin";
     }
 }
